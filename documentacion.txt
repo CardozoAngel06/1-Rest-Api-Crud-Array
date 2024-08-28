@@ -1,0 +1,12 @@
+Rest --> Representation State Tranfer.
+     --> "Estilo de arquitectura de software".
+     --> Documento de recomendaciones para construir API.
+     --> Rest estandariza la sintaxis de las peticciones: Verbohttp - url - datos (app.get('/productos/:id')).
+
+API --> Aplicacion intermedia entre los datos y el cliente (Front).
+
+ResFulAPI --> - Es uns API construida utilizando recomendaciones Rest.
+              - Funciones estrictamente bajo arquitectura cliente/servidor utilizando http como protocolo de comunicacion.
+              - Operaciones de una API Rest: crear - leer - actualizar - eliminar.
+                                             create - read - update - delete.
+                                                          (Crud)
