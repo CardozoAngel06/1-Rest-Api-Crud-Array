@@ -26,16 +26,37 @@ app.post('/Productos', (req, res) => {
 
 })
 
-app.put('/Productos', (req, res) => {
-    res.send('Actualizando un producto.')
+app.put('/Productos/:id', (req, res) => {
+    prodEncontrado = productos.find((p)=>p.id==req.params.id)
+    if(!prodEncontrado){
+        return res.status(404),res.json('No se encuentra el producto')
+      }
+      console.log(req.params.id)
+      console.log(req.body)
+      nuevosDatos = req.body
+      productos = productos.map(p=>p.id==req.params.id?{...p,...nuevosDatos}:p)
+      res.json({mensaje: 'Productos actualizados', Productos: nuevosDatos})
 })
 
-app.delete('/Productos', (req, res) => {
-    res.send('Eliminado un producto.')
+app.delete('/Productos/:id', (req,res)=>{
+        const prodEncontrado = productos.find((p)=>p.id==req.params.id)
+        if(!prodEncontrado){
+          return res.status(404),res.json('No se encuentra el producto')
+        }
+        productos = productos.filter((p)=>p.id!=req.params.id)
+        res.json({Mensaje:"Producto eliminado", Producto: prodEncontrado})
 })
 
-app.get('/Productos/:id', (req, res) => {
-    res.send('Mostrando un producto.')
+app.get('/Productos/:id', (req,res)=>{
+        console.log(req.params.id)
+        prodEncontrado = productos.find((p)=>p.id==req.params.id)
+        if(!prodEncontrado){
+          return res.status(404),res.json('No se encuentra el producto')
+        }
+        res.json({
+            mensaje: "Producto encontrado",
+            Producto: prodEncontrado
+        })
 })
 
 app.listen(port , () => {
